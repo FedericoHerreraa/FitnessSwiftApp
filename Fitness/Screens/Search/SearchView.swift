@@ -18,7 +18,9 @@ struct SearchView: View {
             NavigationView {
                 List {
                     ForEach(filteredExercises) { exercise in
-                        ExerciseViewCell(exercise: exercise)
+                        NavigationLink(destination: ExerciseDetailView(exercise: exercise)) {
+                            ExerciseViewCell(exercise: exercise)
+                        }
                     }
                 }
                 .listStyle(PlainListStyle())
