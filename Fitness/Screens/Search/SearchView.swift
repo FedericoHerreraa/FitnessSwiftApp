@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var searchText = ""
+    @State var isPreviewProfileOpen = false
+
     
     var filteredExercises: [Exercise] {
         if searchText.isEmpty {
@@ -13,7 +15,6 @@ struct SearchView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TopTitleView(title: "Buscar")
             NavigationView {
                 List {
                     ForEach(filteredExercises) { exercise in
@@ -22,6 +23,19 @@ struct SearchView: View {
                 }
                 .listStyle(PlainListStyle())
                 .searchable(text: $searchText, prompt: "Busca tu ejercicio!")
+                .padding(5)
+                .navigationTitle("Buscar Ejercicios")
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        ToolBarTitle(title: "Fitness")
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        ToolBarIcon(isPreviewProfileOpen: $isPreviewProfileOpen)
+                    }
+                }
+                .sheet(isPresented: $isPreviewProfileOpen) {
+                    ProfilePreview()
+                }
             }
             
         }
