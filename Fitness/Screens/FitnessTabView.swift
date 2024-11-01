@@ -31,7 +31,7 @@ struct FitnessTabView: View {
                 }
                 .tag(3)
         }
-        .accentColor(Color("BrandColor"))
+        .accentColor(Color.orange)
     }
 }
 

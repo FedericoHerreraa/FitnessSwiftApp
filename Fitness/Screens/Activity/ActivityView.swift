@@ -16,8 +16,10 @@ struct ActivityView: View {
                 ChartsView()
                 
                 HStack(spacing: 50) {
-                    PieChartView()
-                    PieChartView()
+                    PieChartView(width: 150, height: 150)
+                        .offset(y: 50)
+                    PieChartView(width: 150, height: 150)
+                        .offset(y: 50)
                 }
                 
                 Spacer()

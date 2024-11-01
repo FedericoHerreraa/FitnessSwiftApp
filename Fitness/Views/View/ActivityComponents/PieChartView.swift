@@ -3,12 +3,14 @@ import SwiftUI
 import Charts
 
 struct PieChartView: View {
+    var width: CGFloat = .infinity
+    var height: CGFloat = .infinity
+    
     var body: some View {
         VStack(alignment: .center) {
             Chart {
                 ForEach(MockData.revenueStreams) { stream in
                     SectorMark(angle: .value("Stream", stream.value),
-//                               outerRadius: stream.name == "Adsenses" ? 180 : 120,
                                innerRadius: .ratio(0.619),
                                angularInset: 2)
                         .foregroundStyle(by: .value("Name", stream.value))
@@ -16,9 +18,8 @@ struct PieChartView: View {
                 }
             }
             .chartLegend(.hidden)
-            .frame(width: 150, height: 150)
+            .frame(width: width, height: height)
         }
-        .offset(y: 50)
         
     }
 }

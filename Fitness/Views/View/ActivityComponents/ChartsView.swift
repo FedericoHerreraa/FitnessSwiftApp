@@ -3,7 +3,7 @@
 import SwiftUI
 import Charts
 
-struct ChartsView: View {
+struct ChartsView: View {    
     var body: some View {
         Text("Actividad por Mes")
         

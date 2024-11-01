@@ -7,25 +7,52 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Image("fitness-banner-image")
-                    .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: 200)
-                    .offset(y: 20)
+                HStack {
+                    ChartHomeExampleView()
+                }
+                .frame(width: 370, height: 150)
+                .background(Color("CardColor"))
+                .cornerRadius(20)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 5)
                 
-                TitleButtonSection(
-                    title: "Rutina 100% Personalizada",
-                    buttonLabel: "Mi Rutina",
-                    buttonImage: "pencil.and.list.clipboard",
-                    routine: true
-                )
-                .padding(.bottom, 30)
+                HStack(spacing: 10) {
+                    VStack(alignment: .center) {
+                        PieChartView(width: 90, height: 90)
+                    }
+                    .frame(width: 180, height: 150)
+                    .background(Color("CardColor"))
+                    .cornerRadius(20)
+                    .padding(.leading, 20)
+                    
+                    HStack {
+                        PieChartView(width: 90, height: 90)
+                    }
+                    .frame(width: 180, height: 150)
+                    .background(Color("CardColor"))
+                    .cornerRadius(20)
+                    .padding(.trailing, 20)
+                }
+                
+                
+                VStack(alignment: .leading) {
+                    TitleButtonSection(
+                        title: "Mi Rutina Personalizada",
+                        buttonLabel: "Mi Rutina",
+                        buttonImage: "pencil.and.list.clipboard",
+                        routine: true
+                    )
+                    .padding(.bottom, 30)
 
-                TitleButtonSection(
-                    title: "Seguimiento de tu Actividad",
-                    buttonLabel: "Actividad",
-                    buttonImage: "chart.bar",
-                    routine: false
-                )
+                    TitleButtonSection(
+                        title: "Seguimiento de tu Actividad",
+                        buttonLabel: "Actividad",
+                        buttonImage: "chart.bar",
+                        routine: false
+                    )
+                }
+                .padding(.horizontal, 20)
+                
 
                 Spacer()
             }
