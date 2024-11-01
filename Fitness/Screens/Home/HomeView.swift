@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var isPreviewProfileOpen = false
+    @StateObject private var viewModel = HomeViewModel()
+    @Binding var tabSelected: Int
 
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(alignment: .leading) {
                 Image("fitness-banner-image")
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 200)
@@ -13,7 +14,7 @@ struct HomeView: View {
                 
                 TitleButtonSection(
                     title: "Rutina 100% Personalizada",
-                    buttonLabel: "Crear Rutina ->",
+                    buttonLabel: "Mi Rutina",
                     buttonImage: "pencil.and.list.clipboard",
                     routine: true
                 )
@@ -21,7 +22,7 @@ struct HomeView: View {
 
                 TitleButtonSection(
                     title: "Seguimiento de tu Actividad",
-                    buttonLabel: "Actividad ->",
+                    buttonLabel: "Actividad",
                     buttonImage: "chart.bar",
                     routine: false
                 )
@@ -34,18 +35,19 @@ struct HomeView: View {
                     ToolBarTitle(title: "Fitness")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarIcon(isPreviewProfileOpen: $isPreviewProfileOpen)
+                    ToolBarIcon(isPreviewProfileOpen: $viewModel.isPreviewProfileOpen)
                 }
             }
-            .sheet(isPresented: $isPreviewProfileOpen) {
-                ProfilePreview()
+            .sheet(isPresented: $viewModel.isPreviewProfileOpen) {
+                ProfilePreview(tabSelected: $tabSelected,
+                               previewProfileOpen: $viewModel.isPreviewProfileOpen)
             }
         }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(tabSelected: .constant(0))
 }
 
 struct TitleButtonSection: View {
@@ -57,14 +59,14 @@ struct TitleButtonSection: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(title)
-                .font(.title)
+                .font(.title2)
                 .fontWeight(.semibold)
             
             NavigationLink(destination:
                             routine
                                 ? AnyView(CreateRutineView())
                                 : AnyView(StepsFollowView())) {
-                HStack(alignment: .bottom) {
+                HStack(alignment: .center) {
                     Image(systemName: buttonImage)
                         .resizable()
                         .scaledToFit()
@@ -77,6 +79,13 @@ struct TitleButtonSection: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                     
+                    Image(systemName: "arrow.right")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 15)
+                        .foregroundColor(.white)
+                        .padding(.leading, 5)
+                    
                     Spacer()
                 }
                 .frame(width: 220, height: 45)
@@ -85,6 +94,7 @@ struct TitleButtonSection: View {
                 .shadow(radius: 5)
             }
         }
+        .padding(.horizontal, 10)
         .offset(y: 50)
     }
 }

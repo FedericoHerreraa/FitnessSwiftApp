@@ -3,23 +3,33 @@
 import SwiftUI
 
 struct FitnessTabView: View {
+    @State var tabSelected: Int = 0
+    
     var body: some View {
-        TabView {
-            Tab("Inicio", systemImage: "house.fill") {
-                HomeView()
-            }
+        TabView(selection: $tabSelected) {
+            HomeView(tabSelected: $tabSelected)
+                .tabItem {
+                    Label("Inicio", systemImage: "house.fill")
+                }
+                .tag(0)
             
-            Tab("Buscar", systemImage: "magnifyingglass") {
-                SearchView()
-            }
+            SearchView(tabSelected: $tabSelected)
+                .tabItem {
+                    Label("Buscar", systemImage: "magnifyingglass")
+                }
+                .tag(1)
+
+            ActivityView(tabSelected: $tabSelected)
+                .tabItem {
+                    Label("Actividad", systemImage: "chart.line.uptrend.xyaxis")
+                }
+                .tag(2)
             
-            Tab("Actividad", systemImage: "chart.line.uptrend.xyaxis") {
-                ActivityView()
-            }
-            
-            Tab("Perfil", systemImage: "person") {
-                AccountView()
-            }
+            AccountView()
+                .tabItem {
+                    Label("Perfil", systemImage: "person")
+                }
+                .tag(3)
         }
         .accentColor(Color("BrandColor"))
     }

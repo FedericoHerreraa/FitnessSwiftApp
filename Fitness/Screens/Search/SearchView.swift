@@ -1,15 +1,14 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var searchText = ""
-    @State var isPreviewProfileOpen = false
+    @StateObject private var viewModel = SearchViewModel()
+    @Binding var tabSelected: Int
 
-    
-    var filteredExercises: [Exercise] {
-        if searchText.isEmpty {
+    var filteredExercises: [ExerciseDetail] {
+        if viewModel.searchText.isEmpty {
             return Exercises.all
         } else {
-            return Exercises.all.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            return Exercises.all.filter { $0.name.localizedCaseInsensitiveContains(viewModel.searchText) }
         }
     }
     
@@ -24,7 +23,7 @@ struct SearchView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
-                .searchable(text: $searchText, prompt: "Busca tu ejercicio!")
+                .searchable(text: $viewModel.searchText, prompt: "Busca tu ejercicio!")
                 .padding(5)
                 .navigationTitle("Buscar Ejercicios")
                 .toolbar {
@@ -32,11 +31,12 @@ struct SearchView: View {
                         ToolBarTitle(title: "Fitness")
                     }
                     ToolbarItem(placement: .topBarTrailing) {
-                        ToolBarIcon(isPreviewProfileOpen: $isPreviewProfileOpen)
+                        ToolBarIcon(isPreviewProfileOpen: $viewModel.isPreviewProfileOpen)
                     }
                 }
-                .sheet(isPresented: $isPreviewProfileOpen) {
-                    ProfilePreview()
+                .sheet(isPresented: $viewModel.isPreviewProfileOpen) {
+                    ProfilePreview(tabSelected: $tabSelected,
+                                   previewProfileOpen: $viewModel.isPreviewProfileOpen)
                 }
             }
             
@@ -45,5 +45,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(tabSelected: .constant(0))
 }

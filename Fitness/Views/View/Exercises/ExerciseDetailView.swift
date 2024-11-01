@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct ExerciseDetailView: View {
-    var exercise: Exercise?
+    var exercise: ExerciseDetail?
     var stepNumber = 1
     
     var body: some View {

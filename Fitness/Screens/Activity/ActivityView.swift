@@ -1,15 +1,50 @@
 
 
 import SwiftUI
+import Charts
 
 struct ActivityView: View {
+    @State var isPreviewProfileOpen = false
+    
+    @Binding var tabSelected: Int
+    
+    
+    
     var body: some View {
-//        TopTitleView(title: "Actividad")
-        
-        Spacer()
+        NavigationView {
+            VStack(alignment: .leading, spacing: 5) {
+                ChartsView()
+                
+                HStack(spacing: 50) {
+                    PieChartView()
+                    PieChartView()
+                }
+                
+                Spacer()
+            }
+            .padding(.top, 30)
+            .padding(.horizontal, 20)
+            .navigationTitle("Actividad")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    ToolBarTitle(title: "Fitness")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    ToolBarIcon(isPreviewProfileOpen: $isPreviewProfileOpen)
+                }
+            }
+            .sheet(isPresented: $isPreviewProfileOpen) {
+                ProfilePreview(tabSelected: $tabSelected,
+                               previewProfileOpen: $isPreviewProfileOpen)
+            }
+        }
     }
 }
 
 #Preview {
-    ActivityView()
+    ActivityView(tabSelected: .constant(0))
 }
+
+
+
+

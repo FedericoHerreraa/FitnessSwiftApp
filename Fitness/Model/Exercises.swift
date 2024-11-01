@@ -7,7 +7,7 @@ struct Steps: Identifiable {
     let name: String
 }
 
-struct Exercise: Identifiable {
+struct ExerciseDetail: Identifiable {
     let id: Int
     let name: String
     let description: String
@@ -15,13 +15,22 @@ struct Exercise: Identifiable {
 }
 
 struct Exercises {
+    static let onlyExercises: [Exercise] = [
+        Exercise(name: "Push-Up"),
+        Exercise(name: "Squat"),
+        Exercise(name: "Plank"),
+        Exercise(name: "Tricep Dips"),
+        Exercise(name: "Calf Raises"),
+        Exercise(name: "Leg Raises"),
+    ]
+    
     static let stepDefault1: Steps = Steps(id: 000, name: "")
     
     static let stepDefault2: Steps = Steps(id: 000, name: "")
     
     static let defaultSteps: [Steps] = [stepDefault1, stepDefault2]
     
-    static let defaultExercise: Exercise = Exercise(
+    static let defaultExercise: ExerciseDetail = ExerciseDetail(
         id: 1,
         name: "Push-Up",
         description: "A basic exercise for chest and triceps.",
@@ -32,8 +41,8 @@ struct Exercises {
         ]
     )
     
-    static let all: [Exercise] = [
-        Exercise(
+    static let all: [ExerciseDetail] = [
+        ExerciseDetail(
             id: 1,
             name: "Flexión de Pecho",
             description: "Ejercicio básico para pecho y tríceps.",
@@ -43,7 +52,7 @@ struct Exercises {
                 Steps(id: 3, name: "Empuja hacia arriba hasta volver a la posición inicial.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 2,
             name: "Sentadilla",
             description: "Fortalece piernas y glúteos.",
@@ -54,7 +63,7 @@ struct Exercises {
                 Steps(id: 4, name: "Vuelve a la posición inicial.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 3,
             name: "Plancha",
             description: "Ejercicio para fortalecer el núcleo.",
@@ -64,7 +73,7 @@ struct Exercises {
                 Steps(id: 3, name: "Aguanta la posición el mayor tiempo posible.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 4,
             name: "Desplante",
             description: "Ejercicio que trabaja las piernas y los glúteos.",
@@ -74,7 +83,7 @@ struct Exercises {
                 Steps(id: 3, name: "Empuja hacia atrás hasta la posición inicial y repite con la otra pierna.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 5,
             name: "Elevación de Piernas",
             description: "Ejercicio para fortalecer el abdomen inferior.",
@@ -84,7 +93,7 @@ struct Exercises {
                 Steps(id: 3, name: "Baja las piernas de manera controlada sin tocar el suelo.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 6,
             name: "Curl de Bíceps",
             description: "Ejercicio básico para fortalecer los bíceps.",
@@ -94,7 +103,7 @@ struct Exercises {
                 Steps(id: 3, name: "Baja lentamente a la posición inicial.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 7,
             name: "Press Militar",
             description: "Fortalece los hombros y el tríceps.",
@@ -104,7 +113,7 @@ struct Exercises {
                 Steps(id: 3, name: "Baja lentamente la barra hasta la altura de los hombros.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 8,
             name: "Remo con Mancuerna",
             description: "Ejercicio para fortalecer la espalda.",
@@ -114,7 +123,7 @@ struct Exercises {
                 Steps(id: 3, name: "Baja la mancuerna de manera controlada.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 9,
             name: "Mountain Climbers",
             description: "Ejercicio de alta intensidad para el core y la resistencia.",
@@ -124,7 +133,7 @@ struct Exercises {
                 Steps(id: 3, name: "Mantén el abdomen contraído y el ritmo constante.")
             ]
         ),
-        Exercise(
+        ExerciseDetail(
             id: 10,
             name: "Burpee",
             description: "Ejercicio de cuerpo completo que mejora la resistencia y fuerza.",
